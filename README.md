@@ -17,14 +17,14 @@ determinism or not.
 behavioral neuroscience or Scientific reports). Source codes for estimating the nonlinear measures and for
 surrogate analysis should be included as an Appendix.
 5. Information about EEG recording setup and subjects (both patients and healthy controls) is as follows:
-- EEG Recording for the data set you are provided with was done in a 2-channel recording paradigm (Fp1, Fp2).
+   - EEG Recording for the data set you are provided with was done in a 2-channel recording paradigm (Fp1, Fp2).
 the signal was band-pass filtered(0 – 50Hz), and was sampled at 256Hz sampling frequency.
-- You will be provided with data from healthy control subjects, as well as data from patients who have been
+   - You will be provided with data from healthy control subjects, as well as data from patients who have been
 clinically diagnosed with panic disorder.
-- Recording was done under eye-open conditions and you will be provided with two channel EEG data
+   - Recording was done under eye-open conditions and you will be provided with two channel EEG data
 corresponding to the FP1 and FP2 channels. Each data EEG recording will have data acquired continuously
 from 60s of an EEG recording, totalling in about 15360 data points per EEG channel.
-- Further details(Age, Gender, Specific Experiment Conditions) will be provided along with the EEG data sets
+   - Further details(Age, Gender, Specific Experiment Conditions) will be provided along with the EEG data sets
 (which will be in .txt format).
 
 ### dataset 

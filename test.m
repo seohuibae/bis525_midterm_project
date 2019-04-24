@@ -57,7 +57,7 @@ load('Xmat_PatientA.mat');
 % title('correlation function')
 % 
 %% Nonlinear measure: largest lyapunov exponent 
-[d lle]= LyapunovExponent(Xmat, 0.5, size(Xmat,2)/5, 1/dt);
+[d lle]= LyapunovExponent(Xmat, 0.5, size(Xmat,2)/5, 1/dt, 1);
 figure('Position', [0 0 300 300])
 plot(d);
 xlabel('iteration')
@@ -73,3 +73,9 @@ fprintf("largest lyapunov exponent %f", lle);
 % axis tight
 % pause(0.01)
 % 
+
+%% Recurrence plot
+% [RMat, cnt] = Recurrence(Xmat);
+% figure('Position',[0 0 300 300])
+% scatter(RMat);
+

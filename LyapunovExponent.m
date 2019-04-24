@@ -1,4 +1,4 @@
-function [d, lle] = LyapunovExponent(Xmat, meanperiod, maxiter, fs)
+function [d, lle] = LyapunovExponent(Xmat, meanperiod, maxiter, fs, first_positive)
 % an implementation of largest lyapunov exponent using Rosenstein's Algorithm
 
 % ===== outputs =====
@@ -28,11 +28,17 @@ for k=1:maxiter
     pt=0;
     for j=1:M
         if j<=maxind && nearpos(j)<=maxind
-            dist_k=sqrt(sum((Xmat(:,j+k)-Xmat(:,nearpos(j)+k)).^2,1));
-             if dist_k~=0
-                evolve=evolve+log(dist_k);
-                pt=pt+1;
-             end
+            if first_positive == 0
+                dist_k=sqrt(sum((Xmat(:,j+k)-Xmat(:,nearpos(j)+k)).^2,1));
+                if dist_k~=0
+                    evolve=evolve+log(dist_k);
+                end
+            else
+                dist = Xmat(:,j+k)-Xmat(:,nearpos(j)+k);
+                evolve=evolve+max(log(dist));    
+            end
+            pt=pt+1;
+             
         end
     end
     if pt > 0

@@ -1,8 +1,8 @@
 # BiS525 Brain Dynamics Term project 2019
 KAIST bis525 midterm project
 
-### project description
-We are supposed to provide you with time series of EEG (electroencephalogram) recorded from patients with
+### description
+- We are supposed to provide you with time series of EEG (electroencephalogram) recorded from patients with
 panic disorder (3 sets) (class website or by emails) and age-matched healthy subjects (3 sets). They are
 measured in microvolts and represent measurements taken at the sampling frequency of 256Hz. The number
 of data points is about 15,360.
@@ -28,14 +28,25 @@ from 60s of an EEG recording, totalling in about 15360 data points per EEG chann
 (which will be in .txt format).
 
 ### dataset 
-The dataset provided for this midterm exam is an excerpt containing 2-channel EEG recordings for 3
+- The dataset provided for this midterm exam is an excerpt containing 2-channel EEG recordings for 3
 patients in each subject group (Control, Panic disorder), meaning that there are 12 EEG recordings in
 total.
-They are sampled at 256Hz, and were collected from a resting state eye-open condition in which
+- They are sampled at 256Hz, and were collected from a resting state eye-open condition in which
 participants were asked to fixate on a point for 1 minute and being restricted form moving both their
 head and their eye gaze.
-The data has been stored in tab delimited .txt files. Each txt file has two columns. The left column is the
+- The data has been stored in tab delimited .txt files. Each txt file has two columns. The left column is the
 time point, and the right column is the sampled EEG voltage.
-Each patient folder has two text files. EEG-1 corresponds to recordings from the FP1 channel, and EEG-2
+- Each patient folder has two text files. EEG-1 corresponds to recordings from the FP1 channel, and EEG-2
 corresponds to recordings from the FP2 channel.
-Basic subject information is provided below:
+- Basic subject information is provided below:
+| experimental group (panic disorder) | age | gender |
+|-------------------------------------|-----|--------|
+| A                                   | 45  | F      |
+| B                                   | 21  | F      |
+| C                                   | 70  | F      |
+
+| control group | age | gender |
+|---------------|-----|--------|
+| A             | 53  | F      |
+| B             | 42  | M      |
+| C             | 21  | F      |

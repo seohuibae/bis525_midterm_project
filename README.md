@@ -1,4 +1,4 @@
-# bis525_midterm_project
+# BiS525 Brain Dynamics Term project 2019
 KAIST bis525 midterm project
 
 ### project description

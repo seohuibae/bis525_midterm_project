@@ -11,10 +11,10 @@ EEG = data(:,2);
 dt = time(2) - time(1);
 
 %% Test for function 'PhaseSpace'
-tau = 20;
-numD = 3;
+
 % [Xmat, tau, numD] = ReconstructPhaseSpace(EEG);
 load('Xmat_PatientA.mat');
+% load('Xmat_ControlA.mat');
 
 % figure;
 % plot3(Xmat(1,:),Xmat(2,:),Xmat(3,:))
@@ -39,7 +39,7 @@ load('Xmat_PatientA.mat');
 % ylabel('# of Recurrence')
 % 
 % %% Nonlinear measure: correlation dimension D2
-% rVec=1:1:5;
+% rVec=1:200:1000;
 % 
 % CVec = CorrelationDimension(Xmat, rVec);
 % D2Vec = log(CVec)./log(rVec);
@@ -53,26 +53,35 @@ load('Xmat_PatientA.mat');
 % figure('Position', [0 0 300 300])
 % plot(log(rVec), D2Vec)
 % xlabel('log r')
-% ylabel('log C(r)')
-% title('correlation function')
+% ylabel('D2')
+% title('D2')
 % 
 %% Nonlinear measure: largest lyapunov exponent 
-[d lle]= LyapunovExponent(Xmat, 0.5, size(Xmat,2)/5, 1/dt, 1);
-figure('Position', [0 0 300 300])
-plot(d);
-xlabel('iteration')
-ylabel('divergence')
-title('divergence of nearest trajectoires') 
-fprintf("largest lyapunov exponent %f", lle);
-% 
-% %% surrogate data generator 
+% maxiter=size(Xmat,2)/50;
+% [d lle neardis]= LyapunovExponent(Xmat, 2, maxiter, 1/dt, 1);
+% % neardis
 % figure('Position', [0 0 300 300])
-% [y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
+% plot(1:maxiter, d);
+% xlabel('iteration')
+% ylabel('divergence')
+% title('divergence of nearest trajectoires') 
+% fprintf("largest lyapunov exponent %f", lle);
+
+%% surrogate data generator 
+
+[y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
+[Xmat, tau, numD] = ReconstructPhaseSpace(y);
+save Xmat_PatientA_surrogate.mat
+
+% figure('Position', [0 0 300 300])
 % plot(real(y))
 % title('Surrogate after amplitude adaptation')
 % axis tight
-% pause(0.01)
 % 
+% figure('Position', [0 0 300 300])
+% plot(EEG)
+% title('original')
+
 
 %% Recurrence plot
 % [RMat, cnt] = Recurrence(Xmat);

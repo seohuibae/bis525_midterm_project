@@ -129,7 +129,7 @@ cnt=0;
 for i=1:N-dim*tau
     idx = find(neighborsMat(i,:));
     for kk=1:length(idx)
-        if idx(kk)+tau*dim <= len
+        if (idx(kk)+tau*dim <= len) && (i+tau*dim <= len)
             % see "Determining embedding dimension", eq(4)
             a = x(i+tau*dim);
             b = x(idx(kk)+tau*dim);

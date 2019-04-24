@@ -39,6 +39,7 @@ time point, and the right column is the sampled EEG voltage.
 - Each patient folder has two text files. EEG-1 corresponds to recordings from the FP1 channel, and EEG-2
 corresponds to recordings from the FP2 channel.
 - Basic subject information is provided below:
+
 | experimental group (panic disorder) | age | gender |
 |-------------------------------------|-----|--------|
 | A                                   | 45  | F      |

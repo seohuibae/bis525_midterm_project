@@ -1,4 +1,4 @@
-function cnt = NearestNeighbors(Xmat,Xvecs,radius)
+function cnt = Recurrence(Xmat,Xvecs,radius)
 %======inputs=====
 % Xmat: whole data points in phase space (numD * num of points)
 % Xvecs: locations of center of sphere, there can be many centers 

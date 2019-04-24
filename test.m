@@ -8,6 +8,7 @@ data = importdata(file);
 
 time = data(:,1);
 EEG = data(:,2);
+dt = time(2) - time(1);
 
 %% Test for function 'PhaseSpace'
 tau = 20;
@@ -37,25 +38,29 @@ Xmat = PhaseSpace(EEG,tau,numD);
 % ylabel('# of Recurrence')
 
 %% Nonlinear measure: correlation dimension D2
-rVec=1:1:5;
+% rVec=1:1:5;
+% 
+% CVec = CorrelationDimension(Xmat, rVec);
+% D2Vec = log(CVec)./log(rVec);
+% 
+% figure('Position', [0 0 300 300])
+% plot(log(rVec), log(CVec))
+% xlabel('log r')
+% ylabel('log C(r)')
+% title('correlation function')
+% 
+% figure('Position', [0 0 300 300])
+% plot(log(rVec), D2Vec)
+% xlabel('log r')
+% ylabel('log C(r)')
+% title('correlation function')
 
-CVec = CorrelationDimension(Xmat, rVec);
-D2Vec = log(CVec)./log(rVec);
+%% Nonlinear measure: largest lyapunov exponent 
 
 figure('Position', [0 0 300 300])
-plot(log(rVec), log(CVec))
-xlabel('log r')
-ylabel('log C(r)')
-title('correlation function')
-
-figure('Position', [0 0 300 300])
-plot(log(rVec), D2Vec)
-xlabel('log r')
-ylabel('log C(r)')
-title('correlation function')
-
-%% 
-figure('name','Lyapunov Exponent','NumberTitle','off')
-[K, L] = LyapunovExponent()
-plot(K,L,'.');
-title(['Lyapunov Exponent'])  
+[d lle]= LyapunovExponent(Xmat, 5, 1000, 1/dt);
+plot(d);
+xlabel('iteration')
+ylabel('divergence')
+title('divergence of nearest trajectoires') 
+fprintf("largest lyapunov exponent %f", lle);

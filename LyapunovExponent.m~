@@ -1,14 +1,13 @@
-function [d, lle] = LyapunovExponent(Xmat, meanperiod, maxiter, fs)
-% largest lyapunov exponent
-% Rosenstein's Algorithm
+function [K, L] = LyapunovExponent(data_original, Xmat, tau, mean_period, maxiter)
 % d:divergence of nearest trajectoires
-% meanperiod
-% Xmat: reconstructed phase space trajectories (numD * M)
-% fs: sampling frequency
+% x:signal
+% tao:time delay
+% m:embedding dimension
 
-M=size(Xmat,2);
+N=length(data_original);
+M=size(Xmat),2;
 for i=1:M
-    x0=ones(1,M).*Xmat(:,i);
+    x0=ones(M,1)*Xmat(:,i);
     distance=sqrt(sum((Xmat-x0).^2,2));
     for j=1:M
         if abs(j-i)<=meanperiod
@@ -17,14 +16,14 @@ for i=1:M
     end
     [neardis(i) nearpos(i)]=min(distance);
 end
-
+d=zeros(1,length(maxiter));
 for k=1:maxiter
     maxind=M-k;
     evolve=0;
     pt=0;
     for j=1:M
         if j<=maxind && nearpos(j)<=maxind
-            dist_k=sqrt(sum((Xmat(:,j+k)-Xmat(:,nearpos(j)+k)).^2,1));
+            dist_k=sqrt(sum((Xmat(:,j+k)-Xmat(:,nearpos(j)+k)).^2,2));
              if dist_k~=0
                 evolve=evolve+log(dist_k);
                 pt=pt+1;
@@ -39,10 +38,7 @@ for k=1:maxiter
     
 end
 
-%% LLE Calculation
-tlinear=15:78;
-F = polyfit(tlinear,d(tlinear),1);
-lle = F(1)*fs;
+
 
 
 

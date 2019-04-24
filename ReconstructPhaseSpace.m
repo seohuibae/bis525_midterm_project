@@ -1,5 +1,5 @@
 %% Main function
-function [Xmat,tau_opt,numDim] = ReconstructPhaseSpace(x)
+function [Xmat,tau_opt,numDim, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(x)
 % Finding optimal delay
 tauMax = 3000;
 tauVec = 100:100:tauMax;
@@ -129,7 +129,7 @@ cnt=0;
 for i=1:N-dim*tau
     idx = find(neighborsMat(i,:));
     for kk=1:length(idx)
-        if (idx(kk)+tau*dim <= len) && (i+tau*dim <= len)
+        if (idx(kk)+tau*dim <= len) 
             % see "Determining embedding dimension", eq(4)
             a = x(i+tau*dim);
             b = x(idx(kk)+tau*dim);

@@ -70,7 +70,7 @@ load('Xmat_PatientA.mat');
 %% surrogate data generator 
 
 [y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
-[Xmat, tau, numD] = ReconstructPhaseSpace(y);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(y);
 save Xmat_PatientA_surrogate.mat
 
 % figure('Position', [0 0 300 300])

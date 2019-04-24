@@ -58,4 +58,5 @@ end
 
 y = real(y);
 y = y + meanValue;
+y = y'
 

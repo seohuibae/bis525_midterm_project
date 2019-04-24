@@ -1,8 +1,12 @@
 function [d, lle] = LyapunovExponent(Xmat, meanperiod, maxiter, fs)
-% largest lyapunov exponent
-% Rosenstein's Algorithm
-% d:divergence of nearest trajectoires
-% meanperiod
+% an implementation of largest lyapunov exponent using Rosenstein's Algorithm
+
+% ===== inputs =====
+% d: divergence of nearest trajectoires
+% lle: largest lyapunov exponent
+
+% ===== outputs =====
+% meanperiod: 
 % Xmat: reconstructed phase space trajectories (numD * M)
 % fs: sampling frequency
 

@@ -1,20 +1,19 @@
-close all
-clear 
-clc 
-
-dir = fullDir(1,1);
-file = [dir,sprintf('/EEG_%d.txt',1)];
-data = importdata(file);
-
-time = data(:,1);
-EEG = data(:,2);
-dt = time(2) - time(1);
+% close all
+% clear 
+% clc 
+% 
+% dir = fullDir(1,1);
+% file = [dir,sprintf('/EEG_%d.txt',1)];
+% data = importdata(file);
+% 
+% time = data(:,1);
+% EEG = data(:,2);
+% dt = time(2) - time(1);
 
 %% Test for function 'PhaseSpace'
 
 % [Xmat, tau, numD] = ReconstructPhaseSpace(EEG);
-load('Xmat_PatientA.mat');
-% load('Xmat_ControlA.mat');
+
 
 % figure;
 % plot3(Xmat(1,:),Xmat(2,:),Xmat(3,:))
@@ -68,10 +67,85 @@ load('Xmat_PatientA.mat');
 % fprintf("largest lyapunov exponent %f", lle);
 
 %% surrogate data generator 
+%% patient-a-1
+clear 
+clc
+dir = fullDir(1,1);
+file = [dir,sprintf('/EEG_%d.txt',1)];
+data = importdata(file);
 
+time = data(:,1);
+EEG = data(:,2);
+dt = time(2) - time(1);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(EEG);
+save Xmat_Patient_A_1.mat
+
+clear
+clc
+load('Xmat_Patient_A_1.mat');
 [y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
 [Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(y);
-save Xmat_PatientA_surrogate.mat
+save Xmat_Patient_A_1_surrogate.mat
+
+%% patient-a-2
+clear 
+clc
+dir = fullDir(1,1);
+file = [dir,sprintf('/EEG_%d.txt',2)];
+data = importdata(file);
+
+time = data(:,1);
+EEG = data(:,2);
+dt = time(2) - time(1);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(EEG);
+save Xmat_Patient_A_2.mat
+
+clear
+clc
+load('Xmat_Patient_A_2.mat');
+[y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(y);
+save Xmat_Patient_A_2_surrogate.mat
+
+%% control-a-1
+clear 
+clc
+dir = fullDir(2,1);
+file = [dir,sprintf('/EEG_%d.txt',1)];
+data = importdata(file);
+
+time = data(:,1);
+EEG = data(:,2);
+dt = time(2) - time(1);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(EEG);
+save Xmat_Control_A_1.mat
+
+clear
+clc
+load('Xmat_Control_A_1.mat');
+[y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(y);
+save Xmat_Control_A_1_surrogate.mat
+
+%% control-a-2
+clear 
+clc
+dir = fullDir(2,1);
+file = [dir,sprintf('/EEG_%d.txt',2)];
+data = importdata(file);
+
+time = data(:,1);
+EEG = data(:,2);
+dt = time(2) - time(1);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(EEG);
+save Xmat_Control_A_2.mat
+
+clear
+clc
+load('Xmat_Control_A_2.mat');
+[y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
+[Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(y);
+save Xmat_Control_A_2_surrogate.mat
 
 % figure('Position', [0 0 300 300])
 % plot(real(y))

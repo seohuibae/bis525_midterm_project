@@ -1,4 +1,4 @@
-function [cnt RMat]= Recurrence(Xmat,Xvecs,radius)
+function [cnt, RMat]= Recurrence(Xmat,Xvecs,radius)
 %======inputs=====
 % Xmat: whole data points in phase space (numD * num of points)
 % Xvecs: locations of center of sphere, there can be many centers 
@@ -13,9 +13,10 @@ len = size(Xmat,2);
 cnt = 0;
 
 RMat = zeros(size(Xmat,2), size(Xmat,2));
-for i=1:len
-    for j=1:len
+for i=1:len-1
+    for j=i+1:len
         RMat(i,j) = norm(Xmat(:,i)-Xmat(:,j)) < radius;
+        RMat(j,i) = RMat(i,j);
     end
     
 end

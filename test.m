@@ -2,6 +2,7 @@
 % clear 
 % clc 
 % 
+
 % load('./Xmat/Xmat_Patient_A_1.mat')
 
 %% Test for function 'PhaseSpace'
@@ -153,13 +154,35 @@
 
 
 %% test for Recurrence plot
-[Rmat, Dmat] = Recurrence2(Xmat, 5);
-figure('Position',[0 0 300 300])
-colormap([1 1 1;0 0 0]);
-image(Rmat .* 255);
-set(gca, 'Xdir','reverse');
-xlabel('time')
-ylabel('time')
+% [Rmat, Dmat] = Recurrence2(Xmat, 5);
+% figure('Position',[0 0 300 300])
+% colormap([1 1 1;0 0 0]);
+% image(Rmat .* 255);
+% set(gca, 'Xdir','reverse');
+% xlabel('time')
+% ylabel('time')
 
-
-
+% %% surrogate Data Generator
+% clear 
+% clc
+% close all
+% dir = fullDir(1,1);
+% file = [dir,sprintf('/EEG_%d.txt',1)];
+% data = importdata(file);
+% time = data(:,1);
+% EEG = data(:,2);
+% dt = time(2) - time(1);
+% [y, errorAmplitude, errorSpec, fourierCoeff, sortedValues] = SurrogateDataGenerator(EEG);
+% 
+% figure('Position', [0 0 300 300])
+% plot(y)
+% title('Surrogate')
+% 
+% load('./Xmat/Xmat_Patient_A_1_surrogate.mat')
+% figure('Position', [0 0 300 300])
+% plot(y)
+% title('Surrogate after amplitude adaptation')
+% 
+% figure('Position', [0 0 300 300])
+% plot(EEG)
+% title('original')

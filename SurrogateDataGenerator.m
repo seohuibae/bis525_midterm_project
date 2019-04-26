@@ -33,6 +33,7 @@ t = cputime;
 [dummy,index]=sort(rand(size(sortedValues)));
 y(index) = sortedValues;
 
+
 % Main intiative loop
 while ( (errorAmplitude > errorThresshold || errorSpec > errorThresshold) && (cputime-t < timeThresshold) && (speed > speedThresshold) )
     % addapt the power spectrum
@@ -58,5 +59,5 @@ end
 
 y = real(y);
 y = y + meanValue;
-y = y'
+y = y';
 

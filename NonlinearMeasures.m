@@ -2,7 +2,8 @@
 close all;
 
 %% Load variables
-[DIR,TITLE] = fullDir_Xmat(1,1,2,1);
+[DIR,TITLE] = fullDir_Xmat(1,3,1,0);
+
 a = load(DIR);
 Xmat = a.Xmat;
 dt = a.dt;
@@ -18,6 +19,7 @@ plot(log(rVec), log(CVec))
 xlabel('log r')
 ylabel('log C(r)')
 title(['D2: ',TITLE])
+fprintf("D2: %f\n", D2Vec(10))
 
 %% Nonlinear measure: largest lyapunov exponent
 maxiter=size(Xmat,2)/50;

@@ -18,7 +18,7 @@
 % title(sprintf('Phase space: tau=%d, numD=%d',tau,numD))
 % grid on
 
-% %% Test for function 'NearestNeighbors'
+%% Test for function 'NearestNeighbors'
 % 
 % radius=0.5;
 % cntVec = [];
@@ -61,7 +61,7 @@
 % title('divergence of nearest trajectoires') 
 % fprintf("largest lyapunov exponent %f", lle);
 
-% %% surrogate data generator 
+%% data generator 
 % %% patient-a-1
 % clear 
 % clc
@@ -142,7 +142,7 @@
 % [Xmat, tau, numD, tauVec,FNN, AMIVec, dimVec] = ReconstructPhaseSpace(y);
 % save Xmat_Control_A_2_surrogate.mat
 
-%%% surrogate data generator
+%% surrogate data generator
 % figure('Position', [0 0 300 300])
 % plot(real(y))
 % title('Surrogate after amplitude adaptation')
@@ -154,15 +154,24 @@
 
 
 %% test for Recurrence plot
-% [Rmat, Dmat] = Recurrence2(Xmat, 5);
-% figure('Position',[0 0 300 300])
-% colormap([1 1 1;0 0 0]);
-% image(Rmat .* 255);
-% set(gca, 'Xdir','reverse');
-% xlabel('time')
-% ylabel('time')
+load('./Xmat/Xmat_Patient_A_1.mat')
+[Rmat, Dmat] = Recurrence2(Xmat, 3);
+figure('Position',[0 0 300 300])
+colormap([1 1 1;0 0 0]);
+image(Rmat .* 255);
+set(gca, 'Xdir','reverse');
+xlabel('time')
+ylabel('time')
+load('./Xmat/Xmat_Patient_A_1_surrogate.mat')
+[Rmat, Dmat] = Recurrence2(Xmat, 3);
+figure('Position',[0 0 300 300])
+colormap([1 1 1;0 0 0]);
+image(Rmat .* 255);
+set(gca, 'Xdir','reverse');
+xlabel('time')
+ylabel('time')
 
-% %% surrogate Data Generator
+%% surrogate Data Generator
 % clear 
 % clc
 % close all
@@ -186,3 +195,4 @@
 % figure('Position', [0 0 300 300])
 % plot(EEG)
 % title('original')
+

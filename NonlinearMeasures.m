@@ -2,7 +2,7 @@ clear;
 close all;
 
 %% Load variables
-[DIR,TITLE] = fullDir_Xmat(2,1,2,1);
+[DIR,TITLE] = fullDir_Xmat(2,3,1,0);
 
 a = load(DIR);
 Xmat = a.Xmat;

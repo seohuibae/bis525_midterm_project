@@ -10,9 +10,8 @@ for tau=tauVec
     AMIVec = [AMIVec AMI];
 end
 
-[~,i] = min(AMIVec);
+[~,i= min(AMIVec);
 tau_opt = tauVec(i);
-
 
 % Finding estimated dimension
 epsilon = 1;

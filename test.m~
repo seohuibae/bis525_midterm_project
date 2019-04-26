@@ -1,8 +1,8 @@
-% close all
-% clear 
-% clc 
-% 
-% load('./Xmat/Xmat_Patient_A_1.mat')
+close all
+clear 
+clc 
+
+load('./Xmat/')
 
 %% Test for function 'PhaseSpace'
 
@@ -152,14 +152,10 @@
 % title('original')
 
 
-%% test for Recurrence plot
-[Rmat, Dmat] = Recurrence2(Xmat, 5);
+%% Recurrence plot
+[Rmat, Dmat] = Recurrence2(Xmat);
 figure('Position',[0 0 300 300])
-colormap([1 1 1;0 0 0]);
-image(Rmat .* 255);
-set(gca, 'Xdir','reverse');
-xlabel('time')
-ylabel('time')
+scatter(RMat);
 
 
 

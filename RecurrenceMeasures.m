@@ -23,9 +23,9 @@ for ii=1:N
     tmp=find(Rmat(:,ii)==1);
     v=0;
     for t=1:length(tmp)-1
-        if (tmp(t+1)-tmp(t)) == 1 % continuous
+        if ((tmp(t+1)-tmp(t)) == 1) % continuous
             v=v+1;
-        elif (tmp(t+1)-tmp(t)) > 1 
+        elseif ((tmp(t+1)-tmp(t)) > 1 )
             vs=[vs v];
             v=0;
         end

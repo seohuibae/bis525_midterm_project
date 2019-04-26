@@ -19,7 +19,7 @@ figure;
 plot(log(rVec), log(CVec))
 xlabel('log r')
 ylabel('log C(r)')
-title([TITLE,  ' D2: ',])
+title([TITLE,  ' D2: ', num2str(D2)])
 
 %% Nonlinear measure: largest lyapunov exponent
 maxiter=size(Xmat,2)/50;

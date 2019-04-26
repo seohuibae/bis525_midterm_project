@@ -4,7 +4,7 @@ close all
 
 %% embedding dimension
 T=readtable('EstED.csv');
-mat=table2array(T(:,{'control', 'controlSurrogate'}));
+mat=table2array(T(:,{'patient', 'patientSurrogate'}));
 [p,tbl]=anova2(mat');
 
 %% Lyapunov Exponent

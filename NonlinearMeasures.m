@@ -2,7 +2,7 @@
 close all;
 
 %% Load variables
-[DIR,TITLE] = fullDir_Xmat(1,3,1,0);
+[DIR,TITLE] = fullDir_Xmat(1,3,2,0);
 
 a = load(DIR);
 Xmat = a.Xmat;
@@ -23,7 +23,7 @@ fprintf("D2: %f\n", D2Vec(10))
 
 %% Nonlinear measure: largest lyapunov exponent
 maxiter=size(Xmat,2)/50;
-evolutionTime = (1:maxiter) * dt;
+evolutionTime = (1:maxiter) * dt ;
 
 [d, lle]= LyapunovExponent(Xmat, 2, maxiter, 1/dt, 1);
 

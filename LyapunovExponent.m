@@ -1,4 +1,4 @@
-function [d, lle, neardis] = LyapunovExponent(Xmat, meanperiod, maxiter, fs, first_positive)
+function [d, lle] = LyapunovExponent(Xmat, meanperiod, maxiter, fs, first_positive)
 % an implementation of largest lyapunov exponent using Rosenstein's Algorithm
 
 % ===== inputs =====

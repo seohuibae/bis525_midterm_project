@@ -2,5 +2,25 @@ clear
 clc
 close all
 
-Lya=readtable('Lya.csv');
-anova2(T([1,3,5],['patient','control']))
+%% embedding dimension
+T=readtable('EstED.csv');
+mat=table2array(T(:,{'patient', 'control'}));
+[p,tbl]=anova2(mat');
+
+%% Lyapunov Exponent
+
+
+maxiter=/50;
+evolutionTime = (1:maxiter) * dt ;
+
+for ii=1:2
+    for jj=1:3
+        for kk=1:2
+            for ll=1:2
+                [DIR,TITLE] = fullDir_Xmat(ii,jj,kk,ll);
+
+                a = load(DIR);
+                Xmat = a.Xmat;
+                dt = a.dt;
+                [d, lle]= LyapunovExponent(Xmat, 2, maxiter, 1/dt, 1);
+                d=

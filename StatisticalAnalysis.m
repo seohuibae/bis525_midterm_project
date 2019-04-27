@@ -12,10 +12,15 @@ pairs=[{'patient', 'control'},
     {'control','patientSurrogate'},
     {'patientSurrogate', 'controlSurrogate'}];
 %% embedding dimension
+% 
+% T=readtable('EstED.csv');
+% mat=table2array(T(:,pairs(1,:)));
+% [p,tbl]=anova2(mat');
 
+%% D2 
 
-T=readtable('EstED.csv');
-mat=table2array(T(:,pairs(6,:)));
+T=readtable('D2_temp.csv');
+mat=table2array(T(ridx_fp(1,:),pairs(6,:)));
 [p,tbl]=anova2(mat');
 
 

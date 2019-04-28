@@ -27,6 +27,8 @@ xlabel('log r')
 ylabel('D2')
 title([TITLE, ' D2 plot'])
 
+
+
 %% Nonlinear measure: largest lyapunov exponent
 % maxiter=size(Xmat,2)/50;
 % evolutionTime = (1:maxiter) * dt ;

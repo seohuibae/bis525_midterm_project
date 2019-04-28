@@ -16,7 +16,7 @@ for idxClass = 1:2
                 rVec=0:100:1900;
 
                 CVec = CorrelationDimension(Xmat, rVec);
-                D2Vec = diff(log(CVec))./diff(log(rVec));
+                D2Vec = log(CVec)./log(rVec);
                 D2 = nanmax(D2Vec);
 
                 fig_D2 = figure;

@@ -1,6 +1,5 @@
 function [RR, DET, LAM, L , TT, DIV, ENTR, TREND] = RecurrenceMeasures(Rmat)
 N = size(Rmat,1);
-RR = 1/(N^2)*sum(sum(Rmat,1)); % recurrence rate
 
 %% find l
 lspace=1:N;
@@ -17,15 +16,16 @@ end
 lmin=min(ls);
 Pl=hist(ls,lspace)/length(ls);
 %% find v
+
 vspace=1:N;
 vs=[];
 for ii=1:N
     tmp=find(Rmat(:,ii)==1);
     v=0;
     for t=1:length(tmp)-1
-        if (tmp(t+1)-tmp(t)) == 1 % continuous
+        if ((tmp(t+1)-tmp(t)) == 1) % continuous
             v=v+1;
-        elif (tmp(t+1)-tmp(t)) > 1 
+        elseif ((tmp(t+1)-tmp(t)) > 1 )
             vs=[vs v];
             v=0;
         end
@@ -33,20 +33,93 @@ for ii=1:N
 end
 vmin=min(vs);
 Pv=hist(vs,vspace)/length(vs);
-        
-%% D
-DET = 0;
-% DET_nom = 0;
-% for ii=lmin:N
-%     DET_nom = DET_nom + lspace(ii)*Pl(ii);
-% end
-% DET_denom = 0;
-% for ii=1:N
-%     DET_denom = DET_denom + lspace(ii)*Pl(ii);
-% end
-% DET = DET_nom / DET_denom;
 
-%% LAM
+
+%% RQA
+Lmin=2;
+if nargin < 2
+    I=0;
+end
+N1=size(RP,1);
+Yout=zeros(1,N1);
+for k=2:N1
+    On=1;
+    while On<=N1+1-k
+        if RP(On,k+On-1)==1
+            A=1;off=0;
+            while off==0 & On~=N1+1-k
+                if RP(On+1,k+On)==1
+                    A=A+1;On=On+1;
+                else
+                    off=1;
+                end
+            end
+            Yout(A)=Yout(A)+1;
+        end 
+        On=On+1;
+    end
+end
+if I==0
+    S=2*Yout;
+end       
+if I==1
+    RP=RP';
+    for k=2:N1
+        On=1;
+        while On<=N1+1-k
+            if RP(On,k+On-1)==1
+                A=1;off=0;
+                while off==0 & On~=N1+1-k
+                    if RP(On+1,k+On)==1
+                        A=A+1;On=On+1;
+                    else
+                        off=1;
+                    end
+                end
+                Yout(A)=Yout(A)+1;
+            end 
+            On=On+1;
+        end
+    end
+    S=Yout;
+end
+
+
+%% recurrence rate (RR)
+SR=0;
+for i=1:N1
+    SR=SR+i*S(i);
+end
+RR=SR/(N1*(N1-1));
+%% determinism (%DET)
+if SR==0
+    DET=0;
+else
+    DET=(SR-sum(S(1:Lmin-1)))/SR;
+end
+%% ENTR = entropy (ENTR)
+pp=S/sum(S);
+entropy=0;
+F=find(S(Lmin:end));
+l=length(F);
+if l==0
+    ENTR=0;
+else
+    F=F+Lmin-1;
+    ENTR=-sum(pp(F).*log(pp(F)));
+end
+
+
+
+%% DET: (#points in diagonal lines)/(#recurrent points)
+cnt = 0
+total_pts = sum(sum(Rmat,1))
+for ii=1:N
+    if Rmat(ii,ii)==1
+        cnt = cnt+1;
+DET = cnt/total_pts;
+
+%% LAM: (#points in vertical lines)/(#recurrent points)
 LAM = 0;
 
 %% L: averaged diagonal line length
@@ -58,6 +131,25 @@ for ii=lmin:N
 end
 L = L_num / L_denom;
 
-%% TT : trapping tim
-    
+%% TT : trapping time
+TT_num = 0;
+TT_denom = 0';
+for ii=vmin:N
+    TT_num = TT_num + vspace(ii)*Pv(ii);
+    TT_denom = TT_denom + Pv(ii);
+end
+TT = TT_num / TT_denom; 
 
+%% DIV: maximal diagonal line length, divergence
+DIV = 1/max(l);
+
+%% ENTR: shannons' entropy of p(l) that a diagonal line has exactly length l 
+pl = Pl./DET_num;
+ENTR = 0;
+for ii=lmin:N
+    ENTR = ENTR + pl(ii)*log(pl(ii));
+end
+ENTR = (-1)* ENTR;
+
+%% TREND: the regression coefficient of a linear relationship between the density of recurrence points in a line parallel to the LOI and its distance to the LOI.
+TREND=0;

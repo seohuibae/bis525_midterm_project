@@ -13,34 +13,52 @@ pairs=[{'patient', 'control'},
     {'patientSurrogate', 'controlSurrogate'}];
 %% embedding dimension
 % 
-% T=readtable('EstED.csv');
+T=readtable('./resulttable/EstED.csv');
 % mat=table2array(T(:,pairs(1,:)));
 % [p,tbl]=anova2(mat');
 
+mat=table2array(T(:,3:end));
+mu=mean(mat);
+mu=reshape(mu,2,2);
+figure('Position',[0 0 300 300])
+hBar = bar(mu);
+hBar(1).FaceColor='w';
+hBar(2).FaceColor='k';
+Labels = {'patient', 'control'};
+set(gca, 'XTick', 1:4, 'XTickLabel', Labels);
+colormap(gray)
+ctr2 = bsxfun(@plus, hBar(1).XData, [hBar(1).XOffset]');
+hold on
+plot(ctr2(1:2), [1 1]*mu(1,2)*1.1, '-k', 'LineWidth',2)
+plot(mean(ctr2(1:2)), mu(1,2)*1.15, '*k')
+
+off=abs(hBar(1).XOffset);
+plot([1-off, 1+off], [1 1]*mu(1,2)*1.05, '-k', 'LineWidth',2)
+text(1-off/2, mu(1,2)*1.02, 'n.s.')
+
+off=abs(hBar(2).XOffset);
+plot([2-off, 2+off], [1 1]*mu(1,2)*1.05, '-k', 'LineWidth',2)
+text(2-off/2, mu(1,2)*1.02, 'n.s.')
+hold off
+ylabel('Est-ED')
+
+
+% boxplot(mat,'Notch','on','Labels',{'patient','control'})
+
 %% D2 
 
-T=readtable('D2_temp.csv');
-mat=table2array(T(ridx_fp(1,:),pairs(6,:)));
-[p,tbl]=anova2(mat');
+% T=readtable('./resulttable/D2_temp.csv');
+% mat=table2array(T(ridx_fp(1,:),pairs(6,:)));
+% [p,tbl]=anova2(mat');
 
-
-%% Lyapunov Exponent
-
-
-% maxiter=2000/50;
-% evolutionTime = (1:maxiter) * dt ;
+%% det,entr
+% T=readtable('./resulttable/ENTR.csv');
+% mat=table2array(T(ridx_fp(2,:),pairs(6,:)));
 % 
-% for ii=1:2
-%     for jj=1:3
-%         for kk=1:2
-%             for ll=1:2
-%                 [DIR,TITLE] = fullDir_Xmat(ii,jj,kk,ll);
-% 
-%                 a = load(DIR);
-%                 Xmat = a.Xmat;
-%                 dt = a.dt;
-%                 [d, lle]= LyapunovExponent(Xmat, 2, maxiter, 1/dt, 1);
-%             end
-%         end
-%     end
-% end
+% [p,tbl]=anova2(mat');
+% % [h,p]=ttest(mat(:,1),mat(:,2)); 
+% % p
+
+
+
+

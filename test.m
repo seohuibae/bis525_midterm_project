@@ -154,22 +154,26 @@
 
 
 %% test for Recurrence plot
-load('./Xmat/Xmat_Patient_A_1.mat')
-[Rmat, Dmat] = Recurrence2(Xmat, 3);
-figure('Position',[0 0 300 300])
-colormap([1 1 1;0 0 0]);
-image(Rmat .* 255);
-set(gca, 'Xdir','reverse');
-xlabel('time')
-ylabel('time')
-load('./Xmat/Xmat_Patient_A_1_surrogate.mat')
-[Rmat, Dmat] = Recurrence2(Xmat, 3);
-figure('Position',[0 0 300 300])
-colormap([1 1 1;0 0 0]);
-image(Rmat .* 255);
-set(gca, 'Xdir','reverse');
-xlabel('time')
-ylabel('time')
+% load('./Xmat/Xmat_Control_A_1.mat')
+% [Rmat, Dmat] = Recurrence2(Xmat, 20);
+% figure('Position',[0 0 500 500])
+% colormap([1 1 1;0 0 0]);
+% image(Rmat .* 255);
+% set(gca, 'Xdir','reverse');
+% xlabel('time (bin)')
+% ylabel('time (bin)')
+% title('Control_A_1')
+% 
+% load('./Xmat/Xmat_Control_A_1_surrogate.mat')
+% [Rmat, Dmat] = Recurrence2(Xmat, 20);
+% figure('Position',[0 0 500 500])
+% colormap([1 1 1;0 0 0]);
+% image(Rmat .* 255);
+% set(gca, 'Xdir','reverse');
+% xlabel('time (bin)')
+% ylabel('time (bin)')
+% title('Control_A_1_surrogate')
+
 
 %% surrogate Data Generator
 % clear 
@@ -196,3 +200,12 @@ ylabel('time')
 % plot(EEG)
 % title('original')
 
+
+%% recurrence measures
+clear
+load('./Xmat/Xmat_Control_C_2_surrogate.mat')
+[Rmat, Dmat] = Recurrence2(Xmat, 20);
+[RR, DET, LAM, L , TT, DIV, ENTR] = RecurrenceMeasures(Rmat);
+
+
+ 

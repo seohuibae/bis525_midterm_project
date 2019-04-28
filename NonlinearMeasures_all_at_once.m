@@ -1,10 +1,9 @@
-clear;
-close all;
 
 for idxClass = 1:2
     for idxName = 1:3
         for idxChannel = 1:2
             for isSurrogate = 0:1
+                close all;
                 % Load variables
                 [DIR,TITLE] = fullDir_Xmat(idxClass,idxName,idxChannel,isSurrogate);
 

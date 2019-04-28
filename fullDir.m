@@ -1,3 +1,4 @@
+
 function dir = fullDir(idxClass,idxName)
 dir_common = './dataset';
 dir_class = {'/Panic Disorder','/Control'};
@@ -6,3 +7,8 @@ dir_name = {'/A','/B','/C'};
 
 dir = [dir_common, dir_class{idxClass}, dir_name{idxName}];
 end
+
+
+
+
+

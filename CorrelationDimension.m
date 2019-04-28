@@ -11,8 +11,8 @@ CVec = zeros(1,length(rVec));
 for ii=1:length(rVec)
     r = rVec(ii);
     cntVec = zeros(1,size(Xmat,2));
-    for i=1:size(Xmat,2)
-        for j=i+1:size(Xmat,2)
+    for i=1:N-1
+        for j=i+1:N
             Xvecs=Xmat(:,j);
             tmp(j) = norm(Xmat(:,i)-Xvecs) < r; %bool
         end
